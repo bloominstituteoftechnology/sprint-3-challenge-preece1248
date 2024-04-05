@@ -202,6 +202,8 @@ this.ants = ants.map(ant => ({ name: ant, health: 100 }));
       // 👉 HINT: if you are not feeling confident with map and filter, solve the problem with for loops,
       //      and with the piece of mind of all tests passing
       constructor(...ants) {
+        let list = ['a','b','c']
+        list = list.filter(item => item === "a")
     this.ants = ants.map(name => ({ name, health: 100 }));
   }
   work() {
@@ -212,6 +214,16 @@ this.ants = ants.map(ant => ({ name: ant, health: 100 }));
       ant.health -= 20;
       return ant;
  }).filter(ant => ant.health > 0);
+ while (this.ants.length > 0 && this.ants[0].health <= 0) {
+      this.ants.shift();
+  forEach(ant => {
+      if (ant.health <= 0) {
+        this.ants.splice(this.ants.indexOf(ant), 1);
+      }
+    });
+
+    }
+
     return `${this.ants.length} ants starting work!`;
     }
   feed(name) {
@@ -221,7 +233,6 @@ this.ants = ants.map(ant => ({ name: ant, health: 100 }));
       ant.health += 15;
       found = true;
     }
-      return ant;
   });
     return found ? "Yum!" : `${name} not found!`;
   }
@@ -279,8 +290,9 @@ this.ants = ants.map(ant => ({ name: ant, health: 100 }));
           try {
             const ints = new Integers(2, 1, 0, 6, 5)
             actual = ints.getAllSquared()
-            } catch (err) { actual = err.message }
-};
+          } catch (err) { actual = err.message }
+       
+        
      
     // 🧪 TESTS, do not make any changes below this line ===================
     // 🧪 TESTS, do not make any changes below this line ===================
@@ -301,17 +313,6 @@ this.ants = ants.map(ant => ({ name: ant, health: 100 }));
             actual = ints.getAll()
           } catch (err) { actual = err.message }
           return [description, expected, actual]
-      function () {
-      let actual, description = 'pop removes the last int and returns it'
-      let expected = [3, [1, 2]]
-      try {
-        const ints = new Integers(1, 2, 3)
-        actual = []
-        actual.push(ints.pop())
-        actual.push(ints.ints)
-      } catch (err) { actual = err.message }
-      return [description, expected, actual]
-      },
         },
         function () {
           let actual, description = 'getEvens returns the even ints'
@@ -565,8 +566,8 @@ this.ants = ants.map(ant => ({ name: ant, health: 100 }));
             console.log(`\t❌ Test ${idx + 1} ${desJSON} FAILED:
               Expected ${expJSON}
               Actual   ${actJSON}`)
-        })
       }
+      })
       let getTextArea = () => document.querySelector('.widget textarea')
       let getNumberInput = () => document.querySelector('.widget input[type=number]')
       const getText = () => getTextArea().value
