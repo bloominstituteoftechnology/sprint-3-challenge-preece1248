@@ -1,3 +1,4 @@
+this.ants = ants.map(ant => ({ name: ant, health: 100 }));
 <!DOCTYPE html>
 <html lang="en">
 
@@ -200,38 +201,86 @@
       //      console.log(list) // prints ["a"]
       // 👉 HINT: if you are not feeling confident with map and filter, solve the problem with for loops,
       //      and with the piece of mind of all tests passing
-      constructor(...antNames) {
-    this.ants = antNames.map(name => ({ name: name, health: 100 }));
+      constructor(...ants) {
+    this.ants = ants.map(name => ({ name, health: 100 }));
   }
   work() {
     if (this.ants.length === 0) {
       return "No ants here. Did you work them to death?";
     }
-
-    this.ants.forEach(ant => {
+    this.ants = this.ants.map(ant => {
       ant.health -= 20;
-    });
-
-    this.ants = this.ants.filter(ant => ant.health > 0);
-
-    if (this.ants.length === 0) {
-      return "No ants here. Did you work them to death?";
+      return ant;
+ }).filter(ant => ant.health > 0);
+    return `${this.ants.length} ants starting work!`;
     }
-
-    return `${this.ants.length} ant${this.ants.length !== 1 ? 's' : ''} starting work!`;
-  }
-
   feed(name) {
-    const ant = this.ants.find(ant => ant.name === name);
-    if (ant) {
+  let found = false;
+  this.ants = this.ants.map(ant => {
+    if (ant.name === name) {
       ant.health += 15;
-      return "Yum!";
-    } else {
-      return `${name} not found!`;
+      found = true;
     }
+      return ant;
+  });
+    return found ? "Yum!" : `${name} not found!`;
   }
-}
+ }
+
+
+
+  
+
+
+
     
+    
+    // 🧪 TESTS, do not make any changes below this line ===================
+    // 🧪 TESTS, do not make any changes below this line ===================
+    // 🧪 TESTS, do not make any changes below this line ===================
+    globalThis.challengeVersion = 1
+    globalThis.Integers = Integers
+    globalThis.NerfGun = NerfGun
+    globalThis.EBook = EBook
+    globalThis.AntFarm = AntFarm
+
+    try {
+      testClass('CHALLENGE 1 - class Integers', [
+        function () {
+          let actual, description = 'getAll returns all the ints'
+          let expected = [1, 2, 3, 4]
+          try {
+            const ints = new Integers(1, 2, 3, 4)
+            actual = ints.getAll()
+          } catch (err) { actual = err.message }
+          return [description, expected, actual]
+        },
+        function () {
+          let actual, description = 'getEvens returns the even ints'
+          let expected = [0, 2, 4]
+          try {
+            const ints = new Integers(0, 2, 3, 5, 4)
+            actual = ints.getEvens()
+          } catch (err) { actual = err.message }
+          return [description, expected, actual]
+        },
+        function () {
+          let actual, description = 'getNegatives returns the negative ints'
+          let expected = [-3, -5]
+          try {
+            const ints = new Integers(-3, 5, -5, 0)
+            actual = ints.getNegatives()
+          } catch (err) { actual = err.message }
+          return [description, expected, actual]
+        },
+        function () {
+          let actual, description = 'getAllSquared returns the ints squared'
+          let expected = [4, 1, 0, 36, 25]
+          try {
+            const ints = new Integers(2, 1, 0, 6, 5)
+            actual = ints.getAllSquared()
+            } catch (err) { actual = err.message }
+};
      
     // 🧪 TESTS, do not make any changes below this line ===================
     // 🧪 TESTS, do not make any changes below this line ===================
@@ -252,6 +301,17 @@
             actual = ints.getAll()
           } catch (err) { actual = err.message }
           return [description, expected, actual]
+      function () {
+      let actual, description = 'pop removes the last int and returns it'
+      let expected = [3, [1, 2]]
+      try {
+        const ints = new Integers(1, 2, 3)
+        actual = []
+        actual.push(ints.pop())
+        actual.push(ints.ints)
+      } catch (err) { actual = err.message }
+      return [description, expected, actual]
+      },
         },
         function () {
           let actual, description = 'getEvens returns the even ints'
@@ -505,7 +565,6 @@
             console.log(`\t❌ Test ${idx + 1} ${desJSON} FAILED:
               Expected ${expJSON}
               Actual   ${actJSON}`)
-          }
         })
       }
       let getTextArea = () => document.querySelector('.widget textarea')
