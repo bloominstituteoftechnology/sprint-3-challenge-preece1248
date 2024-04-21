@@ -204,7 +204,7 @@
       //      and with the piece of mind of all tests passing
       constructor(...ants) {
         function 
-        let list = ['a','b','c']
+        let list = ['a','b','c'];
         list = list.map(item => (item === "a" ? item + item : item))
         list = list.filter(item => item === "a")
         this.ants = ants.map(name => ({ name, health: 100 }));
@@ -228,6 +228,7 @@
     return `${this.ants.length} ants starting work!`;
   }
     if (this.ants.length === 0) {
+    }
       return "No ants here. Did you work them to death?";
     }
     this.ants = this.ants.map(ant => {
@@ -264,7 +265,7 @@
   return `${name} not found!`;
     if (arr += this.ants.filter(ant => ant.name === name));
   return found ? "Yum!" : `${name} not found!`;
-    }
+    
   
   
  
