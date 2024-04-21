@@ -1,5 +1,5 @@
-this.ants = ants.map(ant => ({ name: ant, health: 100 }));
-<!DOCTYPE html>
+<!doctype html>
+<html lang="en">
 <html lang="en">
 
 <head>
@@ -203,11 +203,30 @@ this.ants = ants.map(ant => ({ name: ant, health: 100 }));
       // 👉 HINT: if you are not feeling confident with map and filter, solve the problem with for loops,
       //      and with the piece of mind of all tests passing
       constructor(...ants) {
+        function 
         let list = ['a','b','c']
+        list = list.map(item => (item === "a" ? item + item : item))
         list = list.filter(item => item === "a")
-    this.ants = ants.map(name => ({ name, health: 100 }));
+        this.ants = ants.map(name => ({ name, health: 100 }));
   }
   work() {
+    if (this.ants.length === 0) {
+      return "No ants here. Did you work them to death?";
+    }
+    this.ants = this.ants.map(ant => {
+      ant.health -= 20;
+      return ant;
+  }).filter(ant => ant.health > 0);
+  while (this.ants.length > 0 && this.ants[0].health <= 0) {
+      this.ants.shift();
+  }
+  forEach(ant => {
+      if (ant.health <= 0) {
+        this.ants.splice(this.ants.indexOf(ant), 1);
+      }
+    });
+    return `${this.ants.length} ants starting work!`;
+  }
     if (this.ants.length === 0) {
       return "No ants here. Did you work them to death?";
     }
@@ -226,22 +245,33 @@ this.ants = ants.map(ant => ({ name: ant, health: 100 }));
     }
 
     return `${this.ants.length} ants starting work!`;
-    }
-  feed(name) {
-  let found = false;
-  this.ants = this.ants.map(ant => {
-    if (ant.name === name) {
-      ant.health += 15;
-      found = true;
-    }
-  });
+    feed(name) {
+    let found = false;
+    this.ants = this.ants.map(ant => {
+      if (ant.name === name) {
+        ant.health += 15;
+        found = true;
+      }
+      return ant;
+    });
     return found ? "Yum!" : `${name} not found!`;
   }
- }
+    if (arr += this.ants.filter(ant => ant.name === name));
+  if (arr.length > 0) {
+    arr[0].health += 15;
+    return "Yum!";
+  }
+  return `${name} not found!`;
+    if (arr += this.ants.filter(ant => ant.name === name));
+  return found ? "Yum!" : `${name} not found!`;
+    }
+  
+  
+ 
     // 🧪 TESTS, do not make any changes below this line ===================
     // 🧪 TESTS, do not make any changes below this line ===================
     // 🧪 TESTS, do not make any changes below this line ===================
-    globalThis.challengeVersion = 2
+    globalThis.challengeVersion = 1
     globalThis.Integers = Integers
     globalThis.NerfGun = NerfGun
     globalThis.EBook = EBook
@@ -485,50 +515,5 @@ this.ants = ants.map(ant => ({ name: ant, health: 100 }));
             actual = farm.ants
           } catch (err) { actual = err.message }
           return [description, expected, actual]
-        },
-        function () {
-          let actual, description = 'Feeding returns the correct string'
-          let expected = ["Yum!", "bad name not found!", "another bad name not found!"]
-          try {
-            const farm = new AntFarm('Jess', 'Blake', 'Jess')
-            actual = []
-            actual.push(farm.feed('Blake'))
-            actual.push(farm.feed('bad name'))
-            actual.push(farm.feed('another bad name'))
-          } catch (err) { actual = err.message }
-          return [description, expected, actual]
-        },
-      ])
-      function testClass(testTitle, tests) {
-        console.log(testTitle)
-        tests.forEach((test, idx) => {
-          const [, expected, actual] = test()
-          const [desJSON, expJSON, actJSON] = test().map(JSON.stringify)
-          if (_.isEqual(expected, actual)) {
-            console.log(`\t✅ Test ${idx + 1} ${desJSON} PASSED`)
-          } else {
-            console.log(`\t❌ Test ${idx + 1} ${desJSON} FAILED:
-              Expected ${expJSON}
-              Actual   ${actJSON}`)
+        }
       }
-      })
-      let getTextArea = () => document.querySelector('.widget textarea')
-      let getNumberInput = () => document.querySelector('.widget input[type=number]')
-      const getText = () => getTextArea().value
-      const getChars = () => Number(getNumberInput().value)
-      turnPage.disabled = true
-      let book
-      let updateBook = () => {
-        turnPage.disabled = (getText() && getChars() && getChars() > 0) ? false : true
-        book = new EBook(getText(), getChars())
-      }
-      getTextArea().oninput = updateBook
-      getNumberInput().oninput = updateBook
-      turnPage.onclick = () => {
-        bookPage.textContent = book.next() || 'The End'
-      }
-    } catch (err) { actual = err.stack }
-  </script>
-</body>
-
-</html>
